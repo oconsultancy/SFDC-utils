@@ -1,7 +1,129 @@
-public class CsvReader{
-  
-  public void read(){
-    
-  
-  }
+public without sharing class Fraction implements Comparable{
+	
+	public static final Fraction INFINITY_GREAT = new Fraction();
+	public static final Fraction INFINITY_SMALL = new Fraction();
+	
+	//private Integer numerator;
+	//private Integer denominator;
+	private Decimal value;
+	
+	public Fraction(Decimal no){
+		this.value = no;
+	}
+	
+	public Fraction(Integer numerator, Integer denominator){
+		
+		Decimal numeratorD = numerator;
+		
+		this.value = numeratorD.divide(denominator, 2);
+	}
+	
+
+	public Fraction(Integer numerator){
+		
+		this.value = numerator;
+	}
+	
+	private Fraction(){
+		
+	}
+	
+	public Fraction divide(Fraction a){
+		
+		return new Fraction(value.divide(a.value, 2));
+	}
+	
+	public Fraction divide(Integer a){
+		
+		return divide(new Fraction(a));
+	}
+	
+	public Fraction multiply(Fraction a){
+		
+		return new Fraction(value * a.value);
+	}
+	
+	public Fraction multiply(Integer a){
+		
+		return multiply(new Fraction(a));
+	}
+	
+	public Fraction add(Fraction a){
+		
+		return new Fraction(value + a.value);
+	}
+	
+	public Fraction add(Integer a){
+		
+		return add(new Fraction(a));
+	}
+	
+	public Fraction substract(Fraction a){
+		
+		return new Fraction(value - a.value);
+	}
+	
+	public Fraction substract(Integer a){
+		
+		return substract(new Fraction(a));
+	}
+	
+	public Boolean isNegative(){
+		
+		return value < 0;
+	}
+	
+	public Boolean isZero(){
+		
+		return value == 0;
+	}
+	
+	public Boolean isPositive(){
+		
+		return value > 0;
+	}
+	
+	public Fraction negative(){
+		
+		return new Fraction(-1 * value);
+	}
+	
+	public Integer compareTo(Object a){
+		
+		if(!(a instanceof Fraction)) 
+			throw new ONumericException('The compareTo object should be an instance of Fraction.');
+		
+		if(this === a) return 0;
+			
+		Fraction b = (Fraction)a;
+		
+		if(b === INFINITY_GREAT)
+			return -1;
+		
+		if(b === INFINITY_SMALL)
+			return 1;
+		
+		Fraction r = substract(b);
+		
+		if(r.isZero()) return 0;
+		
+		if(r.isPositive()) return 1;
+		
+		return -1;
+	}
+	
+	public Boolean equals(Object a){
+		
+		return compareTo(a) == 0;
+	}
+	
+	public Integer hashCode(){
+		
+		return value.intValue();
+	}
+	
+	public override String toString(){
+		
+		return String.valueOf(value);
+	}
 }
