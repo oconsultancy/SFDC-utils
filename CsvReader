@@ -3,8 +3,6 @@ public without sharing class Fraction implements Comparable{
 	public static final Fraction INFINITY_GREAT = new Fraction();
 	public static final Fraction INFINITY_SMALL = new Fraction();
 	
-	//private Integer numerator;
-	//private Integer denominator;
 	private Decimal value;
 	
 	public Fraction(Decimal no){
